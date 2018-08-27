@@ -28,8 +28,8 @@ sonarqube {
         property 'sonar.host.url', 'http://localhost:9000'
         property 'sonar.projectKey', 'my:jenkinstestapp'
         property 'sonar.projectName', 'MyJenkinsProject'
-        property 'sonar.login', 'admin'
-        property 'sonar.password', 'admin'
+        property 'sonar.login', '1a0984d0e06707e87bf55f96396456f6b1cacbf8'
+
     }
 }
 
