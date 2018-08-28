@@ -13,7 +13,7 @@ pipeline {
           }
           stage('Stage Archive'){
           steps{
-          archiveArtifacts artifacts: 'app/build/outputs/apk/release/*.apk', fingerprint: true
+          archiveArtifacts artifacts: 'app/build/outputs/apk/develop/release/*.apk', fingerprint: true
           }
           }
           stage('SonarQube analysis') {
