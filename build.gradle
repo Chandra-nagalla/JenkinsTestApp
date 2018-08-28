@@ -31,11 +31,7 @@ sonarqube {
         property 'sonar.projectKey', 'my:jenkinstestapp'
         property 'sonar.projectName', 'MyJenkinsProject'
         property 'sonar.login', '3e40ff7b82bf037d1694bc9e22ac89ee9d41e557'
-
-
-        //property "sonar.jacoco.reportPath", "build/jacoco/testDevDebugUnitTest.exec" // path to coverage reports
-
-
+        property "sonar.jacoco.reportPath", "build/jacoco/testDevDebugUnitTest.exec" // path to coverage reports
     }
 }
 
