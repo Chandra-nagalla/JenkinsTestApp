@@ -1,31 +1,32 @@
 pipeline {
  agent any
    stages{
-         stage('get source') {
+         stage('Code Checkout') {
          steps{
               git 'https://github.com/Mokshithasekhar/JenkinsTestApp.git'
               }
           }
-          stage('build apk'){
+          stage('SonarQube analysis') {
+                     steps{
+                                             withSonarQubeEnv('Sonar1') {
+                                                             // requires SonarQube Scanner for Gradle 2.1+
+                                                             // It's important to add --info because of SONARJNKNS-281
+                                                             sh './gradlew --info sonarqube'
+                                                           }
+
+                              }
+                              }
+          stage('Build apk'){
           steps{
               sh './gradlew clean assembleRelease'
               }
           }
-          stage('Stage Archive'){
+          stage('Archive'){
           steps{
-          archiveArtifacts artifacts: 'app/build/outputs/apk/develop/release/*.apk', fingerprint: true
+          archiveArtifacts artifacts: 'app/build/outputs/apk/release/*.apk', fingerprint: true
           }
           }
-          stage('SonarQube analysis') {
-           steps{
-                                   withSonarQubeEnv('Sonar1') {
-                                                   // requires SonarQube Scanner for Gradle 2.1+
-                                                   // It's important to add --info because of SONARJNKNS-281
-                                                   sh './gradlew --info sonarqube'
-                                                 }
 
-                    }
-                    }
 
       }
 
