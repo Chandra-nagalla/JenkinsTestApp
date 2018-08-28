@@ -1,52 +1,50 @@
 package org.com.app;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity {
 
+
+public class MainActivity extends AppCompatActivity  implements LoginView {
+    private EditText etUsername,etPassword;
+    private LoginPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        etUsername = findViewById(R.id.username);
+        etPassword = findViewById(R.id.password);
+        presenter = new LoginPresenter(this);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void setUserName(String s) {
+        etUsername.setText(s);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public String getPassword() {
+        return etPassword.getText().toString();
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+    @Override
+    public void showPasswordErrorEmpty(String s) {
+        etPassword.setError(s);
+    }
 
-        return super.onOptionsItemSelected(item);
+    public void login(View v){
+           presenter.onLoginClicked();
+    }
+
+    @Override
+    public String getUserName() {
+        return etUsername.getText().toString();
+    }
+
+    @Override
+    public void showUserNameError(String s) {
+            etUsername.setError(s);
     }
 }
