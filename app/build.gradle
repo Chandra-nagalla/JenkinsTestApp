@@ -12,17 +12,21 @@ android {
     }
 
     signingConfigs {
+        debug{
 
+        }
         release {
             keyAlias "key0"
             keyPassword "123456789"
-            storeFile file("test.jks")
+            storeFile file("./test.jks")
             storePassword "123456789"
         }
     }
 
     buildTypes {
-
+        debug {
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
